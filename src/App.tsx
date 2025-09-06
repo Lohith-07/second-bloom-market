@@ -4,9 +4,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+
+// Pages
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import Dashboard from "./pages/Dashboard"; // 👈 make sure this file exists and is exported
+import AddProduct from "./pages/AddProduct";
+import Cart from "./pages/Cart";
+import Purchases from "./pages/Purchases";
+import MyListings from "./pages/MyListings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,10 +26,19 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
+            {/* Protected / Custom Routes */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/purchases" element={<Purchases />} />
+            <Route path="/my-listings" element={<MyListings />} />
+
+            {/* Catch-all 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
